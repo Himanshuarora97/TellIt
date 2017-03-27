@@ -19,6 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -45,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ImageView imageView;
     TextView textView;
+    private FirebaseAuth mAuth;
+    GoogleApiClient mGoogleApiClient;
+    int a=0;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     // Variables
     private int PICK_IMAGE_REQUEST = 1;
@@ -56,18 +65,65 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButterKnife.bind(this);
         initToolbar();
         initViewPager();
-        setRoundImage();
+        setRoundImage(a);
         navView.setNavigationItemSelectedListener(this);
         navView.getMenu().getItem(0).setChecked(true);
-    }
 
-    private void setRoundImage() {
         View view = navView.getHeaderView(0);
         imageView = (ImageView) view.findViewById(R.id.profile_image);
         textView = (TextView) view.findViewById(R.id.username);
-        textView.setText("Jackson Parker");
-        Picasso.with(this).load(R.drawable.image5).transform(new CircularImage()).into(imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        mAuth=FirebaseAuth.getInstance();
+
+        mAuthStateListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (firebaseAuth.getCurrentUser()==null){
+
+                  //  startActivity(new Intent(MainActivity.this,Login.class));
+                }
+
+                else{
+
+                    textView.setText(firebaseAuth.getCurrentUser().getDisplayName());
+                    Picasso.with(MainActivity.this).load(firebaseAuth.getCurrentUser().getPhotoUrl()).transform(new CircularImage()).into(imageView);
+
+
+                }
+
+
+            }
+        };
+
+
+    }
+
+    private void setRoundImage(int a) {
+        View view = navView.getHeaderView(0);
+        imageView = (ImageView) view.findViewById(R.id.profile_image);
+        textView = (TextView) view.findViewById(R.id.username);
+     //   a=getIntent().getExtras().getInt("link");
+        if (a==1) {
+            imageView.setVisibility(View.VISIBLE);
+            textView.setText(getIntent().getExtras().getString("name"));
+            Picasso.with(this).load(getIntent().getExtras().getString("photo")).transform(new CircularImage()).into(imageView);
+        }
+        else if (a==0){
+
+            textView.setText("Login");
+            imageView.setVisibility(View.INVISIBLE);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    startActivity(new Intent(MainActivity.this,Login.class));
+
+                }
+            });
+
+    }
+
+            /*     imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -78,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
             }
         });
+        */
     }
 
     private void initViewPager() {
@@ -116,8 +173,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 state = 1;
                 break;
             case R.id.log_fragment:
-                startActivity(new Intent(MainActivity.this, LogInActivity.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
                 state = 2;
+                a=1;
                 break;
             case R.id.setting_fragment:
                 state = 3;
@@ -144,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toast.makeText(MainActivity.this, state + " clicked ", Toast.LENGTH_SHORT).show();
         return true;
     }
-    @Override
+ /*   @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -155,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Picasso.with(this).load(uri).transform(new CircularImage()).into(imageView);
                 // Log.d(TAG, String.valueOf(bitmap));
         }
-    }
+    }*/
 }
 
 
