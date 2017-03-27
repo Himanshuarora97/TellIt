@@ -2,32 +2,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/recent_fragment"
-
-            android:title="Recent Stories" />
-        <item
-            android:id="@+id/top_fragment"
-
-            android:title="Top Stories" />
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
         <item
             android:id="@+id/log_fragment"
-
+            android:icon="@drawable/ic_activity_active"
             android:title="LogIn/SignUp" />
         <item
             android:id="@+id/setting_fragment"
-
+            android:icon="@drawable/ic_settings_black_24dp"
             android:title="Settings" />
         <item
             android:id="@+id/share_fragment"
-
+            android:icon="@drawable/ic_share_black_24dp"
             android:title="Share" />
         <item
             android:id="@+id/rate_fragment"
-
+            android:icon="@drawable/ic_rate_review_black_24dp"
             android:title="Rate" />
         <item
             android:id="@+id/feedback_fragment"
-
-            android:title="Feedbackw" />
+            android:icon="@drawable/ic_feedback_black_24dp"
+            android:title="Feedback" />
     </group>
 </menu>

@@ -112,10 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int state = 0;
         switch (item.getItemId()) {
-            case R.id.recent_fragment:
-                state = 0;
-                break;
-            case R.id.top_fragment:
+            case R.id.home:
                 state = 1;
                 break;
             case R.id.log_fragment:
