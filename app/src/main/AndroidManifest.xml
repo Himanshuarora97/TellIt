@@ -17,8 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LogInActivity">
-w
         </activity>
+        <activity android:name=".chosenStory"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

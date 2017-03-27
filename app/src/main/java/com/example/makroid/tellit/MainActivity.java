@@ -124,6 +124,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.share_fragment:
                 state = 4;
+
+                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                whatsappIntent.setType("text/plain");
+                //whatsappIntent.setPackage("com.whatsapp");
+                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
+                MainActivity.this.startActivity(whatsappIntent);
+
+
+
                 break;
             case R.id.rate_fragment:
                 state = 5;
@@ -148,3 +157,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 }
+
+
