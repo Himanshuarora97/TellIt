@@ -13,6 +13,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -54,15 +60,19 @@ public class Login extends AppCompatActivity {
     @BindView(R.id.google_signIn)
     SignInButton signInButton;
 
+    @BindView(R.id.login_button)
+    LoginButton loginButton;
 
     String personName;
     Uri personPhoto;
 
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         ButterKnife.bind(this);
         mAuth=FirebaseAuth.getInstance();
         final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
@@ -70,6 +80,33 @@ public class Login extends AppCompatActivity {
         usernameWrapper.setHint("Username");
         passwordWrapper.setHint("Password");
         Button b1= (Button) findViewById(R.id.btn);
+        callbackManager=CallbackManager.Factory.create();
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {       // FACEBOOK LOGIN
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                Intent i=new Intent(Login.this,MainActivity.class);
+              //  i.putExtra("")
+
+                startActivity(i);
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
+            }
+        });                          // FACEBOOK LOGIN
+
+
+
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +197,8 @@ public class Login extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
+        callbackManager.onActivityResult(requestCode,resultCode,data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
