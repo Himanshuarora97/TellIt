@@ -21,4 +21,10 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/enter_animation_dialog</item>
+        <item name="android:windowExitAnimation">@anim/share_dialog_animation</item>
+    </style>
+
+
 </resources>

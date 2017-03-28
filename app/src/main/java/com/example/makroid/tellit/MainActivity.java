@@ -1,9 +1,12 @@
 package com.example.makroid.tellit;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,10 +20,23 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.share.ShareApi;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -28,8 +44,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,9 +75,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView textView;
     private FirebaseAuth mAuth;
     GoogleApiClient mGoogleApiClient;
+    private CallbackManager callbackManager;
+    private LoginManager loginManager;
     int a=0;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
+    DrawerLayout dl;
     // Variables
     private int PICK_IMAGE_REQUEST = 1;
 
@@ -68,12 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ButterKnife.bind(this);
         initToolbar();
         initViewPager();
-        setRoundImage(a);
+        setRoundImage(0);
         navView.setNavigationItemSelectedListener(this);
 
         View view = navView.getHeaderView(0);
         imageView = (ImageView) view.findViewById(R.id.profile_image);
         textView = (TextView) view.findViewById(R.id.username);
+        dl= (DrawerLayout) findViewById(R.id.drawer_layout);
         mAuth=FirebaseAuth.getInstance();
 
         mAuthStateListener=new FirebaseAuth.AuthStateListener() {
@@ -87,8 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 else{
 
-                    textView.setText(firebaseAuth.getCurrentUser().getDisplayName());
-                    Picasso.with(MainActivity.this).load(firebaseAuth.getCurrentUser().getPhotoUrl()).transform(new CircularImage()).into(imageView);
+
 
 
                 }
@@ -177,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.log_fragment:
                 startActivity(new Intent(MainActivity.this, Login.class));
                 state = 2;
-                a=1;
                 break;
             case R.id.setting_fragment:
                 state = 3;
@@ -185,13 +206,112 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.share_fragment:
                 state = 4;
 
-                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                whatsappIntent.setType("text/plain");
-                //whatsappIntent.setPackage("com.whatsapp");
-                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
-                MainActivity.this.startActivity(whatsappIntent);
+                dl.closeDrawers();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        final Dialog d=new Dialog(MainActivity.this,android.R.style.Theme_Translucent_NoTitleBar);// necessary to start animation in dialog box
+                        d.setContentView(R.layout.share_dilogue);
+                        d.getWindow().setWindowAnimations(R.style.dialog_animation);
+
+                        ImageButton facebook= (ImageButton) d.findViewById(R.id.fb);
+
+                ImageButton whatsapp= (ImageButton) d.findViewById(R.id.whatsapp);
+                ImageButton other_sharing= (ImageButton) d.findViewById(R.id.other_sharing);
+                TextView close_share= (TextView) d.findViewById(R.id.close_share);
+
+                facebook.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
 
+
+                        FacebookSdk.sdkInitialize(getApplicationContext());
+
+                        callbackManager = CallbackManager.Factory.create();
+
+                        List<String> permissionNeeds = Arrays.asList("publish_actions");
+
+
+                        LoginManager.getInstance().logInWithPublishPermissions(MainActivity.this, permissionNeeds);
+
+                        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
+                        {
+                            @Override
+                            public void onSuccess(LoginResult loginResult)
+                            {
+                                sharePhotoToFacebook();
+                            }
+
+                            @Override
+                            public void onCancel()
+                            {
+                                System.out.println("onCancel");
+                            }
+
+                            @Override
+                            public void onError(FacebookException exception)
+                            {
+                                System.out.println("onError");
+                            }
+                        });
+                    }
+
+                });
+
+
+                whatsapp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                        whatsappIntent.setType("text/plain");
+                        whatsappIntent.setPackage("com.whatsapp");
+                        whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
+                        MainActivity.this.startActivity(whatsappIntent);
+
+
+
+                    }
+                });
+
+
+                other_sharing.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                        whatsappIntent.setType("text/plain");
+                        whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
+                        MainActivity.this.startActivity(whatsappIntent);
+
+
+                    }
+                });
+
+
+                close_share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        d.getWindow().getAttributes().windowAnimations=R.anim.share_dialog_animation;   // showing particular animation
+
+                      new Handler().postDelayed(new Runnable() {
+                          @Override
+                          public void run() {
+
+                              d.dismiss();
+                          }
+                      },500);
+                    }
+                });//  close share dialog box
+
+
+                d.show();
+                    }
+                },800);
 
                 break;
             case R.id.rate_fragment:
@@ -216,6 +336,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // Log.d(TAG, String.valueOf(bitmap));
         }
     }*/
+
+
+    private void sharePhotoToFacebook(){
+        Bitmap image = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .setCaption("Give me my codez or I will ... you know, do that thing you don't like!")
+                .build();
+
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+
+        ShareApi.share(content, null);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int responseCode, Intent data)
+    {
+        super.onActivityResult(requestCode, responseCode, data);
+        callbackManager.onActivityResult(requestCode, responseCode, data);
+    }
+
+
 
 }
 

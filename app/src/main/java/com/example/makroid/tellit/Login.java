@@ -126,8 +126,8 @@ public class Login extends AppCompatActivity {
                     // User is signed in
                     Intent i=new Intent(Login.this,MainActivity.class);
                     i.putExtra("link",1);
-                     i.putExtra("name",firebaseAuth.getCurrentUser().getDisplayName());
-                     i.putExtra("photo",firebaseAuth.getCurrentUser().getPhotoUrl());
+                     i.putExtra("name",personName);
+                     i.putExtra("photo",personPhoto);
                      startActivity(i);
                      startActivity(new Intent(Login.this, MainActivity.class));
 
