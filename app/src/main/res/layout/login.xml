@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#2d3238"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="0.5"
+       android:orientation="vertical">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:gravity="center"
+          android:text="Welcome"
+          android:textSize="30sp"
+          android:textColor="#fff"/>
+
+   </RelativeLayout>
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="0.5"
+       android:orientation="vertical">
+
+      <android.support.design.widget.TextInputLayout
+          android:id="@+id/usernameWrapper"
+          android:background="@drawable/login_button"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+         <EditText
+             android:id="@+id/username"
+             android:background="@null"
+             android:textColor="#fff"
+             android:textColorHint="#41464C"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:inputType="textEmailAddress"
+             android:hint="Username"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+          android:id="@+id/passwordWrapper"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/login_button"
+          android:layout_below="@id/usernameWrapper"
+          android:layout_marginTop="20dp">
+
+         <EditText
+             android:id="@+id/password"
+             android:background="@null"
+             android:textColor="#fff"
+             android:textColorHint="#41464C"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:inputType="textPassword"
+             android:hint="Password"/>
+
+      </android.support.design.widget.TextInputLayout>
+
+      <Button
+          android:id="@+id/btn"
+          android:background="#EA4C89"
+          android:textColor="#fff"
+          android:layout_marginTop="20dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Login"
+          android:textSize="20dp"
+          android:textStyle="bold"/>
+
+
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="30dp"
+          android:layout_marginTop="60dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="#FCFFFF"
+          android:text="Not an account ?"
+          android:textSize="20dp"
+          android:layout_gravity="center_horizontal" />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="#FCFFFF"
+             android:text="Sign up"
+             android:textStyle="bold"
+             android:textSize="20dp"
+             android:layout_gravity="center_horizontal"
+             android:layout_marginLeft="110dp"
+             />
+
+      </FrameLayout>
+
+
+      <com.google.android.gms.common.SignInButton
+          android:id="@+id/google_signIn"
+          android:layout_marginTop="80dp"
+          android:layout_width="match_parent"
+          android:layout_height="60dp"></com.google.android.gms.common.SignInButton>
+
+
+
+
+   </LinearLayout>
+
+</LinearLayout>

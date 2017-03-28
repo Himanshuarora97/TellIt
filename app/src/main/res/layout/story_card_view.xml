@@ -1,9 +1,10 @@
-
 <RelativeLayout
     android:layout_height="402dp"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_marginTop="1dp"
-    android:background="#fff"
+    android:foreground="@drawable/custom_ripple_borderless"
+    android:onClick="dummy"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
