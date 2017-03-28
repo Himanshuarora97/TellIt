@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initViewPager();
         setRoundImage(a);
         navView.setNavigationItemSelectedListener(this);
-        navView.getMenu().getItem(0).setChecked(true);
 
         View view = navView.getHeaderView(0);
         imageView = (ImageView) view.findViewById(R.id.profile_image);
