@@ -3,6 +3,7 @@ package com.example.makroid.tellit;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     LayoutInflater inflater;
     Context c;
     public RecyclerAdapter(Context c) {
-
-
         this.c=c;
         inflater = LayoutInflater.from(c);
 

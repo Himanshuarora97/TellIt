@@ -1,6 +1,7 @@
 package com.example.makroid.tellit;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TITLE = "Tell It";
+    private static final String TAG = MainActivity.class.getClass().getName();
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.viewpager)
@@ -214,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // Log.d(TAG, String.valueOf(bitmap));
         }
     }*/
+
 }
 
 
