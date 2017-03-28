@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1080065382511",
+    "firebase_url": "https://login-6e9ef.firebaseio.com",
+    "project_id": "login-6e9ef",
+    "storage_bucket": "login-6e9ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080065382511:android:f66761be90c52040",
+        "android_client_info": {
+          "package_name": "com.example.makroid.tellit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080065382511-gjfeiiigsi338vji304obp57bnu7ubqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.makroid.tellit",
+            "certificate_hash": "7d18fecf5afa246af046ea829fa3a9233a83c2dd"
+          }
+        },
+        {
+          "client_id": "1080065382511-qj9oi1dvb6vkjgn40i5rjuookjeeu8ef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiNW0TelhnttBr8Th29BTfX2h9qXuvjXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080065382511-qj9oi1dvb6vkjgn40i5rjuookjeeu8ef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
