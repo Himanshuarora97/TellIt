@@ -4,4 +4,5 @@
     <string name="invalid_password">password length greater than 6</string>
     <string name="invalid_email">invalid email ! try Again</string>
     <string name="sign_in">sign in</string>
+    <string name="facebook_app_id">787655048065145</string>
 </resources>

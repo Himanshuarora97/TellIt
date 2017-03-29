@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="#26303A">
+
+     <TextView
+         android:id="@+id/close_share"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Close"
+         android:textColor="#fff"
+         android:layout_alignParentRight="true"
+         android:textSize="20dp"
+         android:textStyle="bold" />
+
+
+
+     <ImageButton
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:background="@drawable/facebook"
+         android:id="@+id/fb"
+         android:layout_marginLeft="81dp"
+         android:layout_marginStart="81dp"
+         android:layout_marginTop="44dp"
+         android:layout_alignParentTop="true"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true" />
+
+
+     <TextView
+         android:textColor="#fff"
+         android:text="facebook"
+         android:textSize="15dp"
+         android:layout_marginTop="100dp"
+         android:layout_marginLeft="69dp"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+
+     <ImageButton
+         android:id="@+id/twitter"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:background="@drawable/twitter"
+         android:layout_marginRight="92dp"
+         android:layout_marginEnd="92dp"
+         android:layout_alignTop="@+id/fb"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentEnd="true" />
+
+       <TextView
+
+           android:textColor="#fff"
+           android:text="whatsapp"
+           android:textSize="15dp"
+           android:layout_marginTop="230dp"
+           android:layout_marginLeft="68dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+
+
+
+     <ImageButton
+         android:id="@+id/whatsapp"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:background="@drawable/whatsapp"
+         android:layout_below="@+id/fb"
+         android:layout_alignLeft="@+id/fb"
+         android:layout_alignStart="@+id/fb"
+         android:layout_marginTop="85dp" />
+
+     <TextView
+
+         android:textColor="#fff"
+         android:text="Twitter"
+         android:textSize="15dp"
+         android:layout_marginTop="100dp"
+         android:layout_marginLeft="220dp"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+
+     <ImageButton
+         android:id="@+id/other_sharing"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:background="@drawable/othersshare"
+         android:layout_alignTop="@+id/whatsapp"
+         android:layout_alignLeft="@+id/twitter"
+         android:layout_alignStart="@+id/twitter" />
+
+
+     <TextView
+
+         android:textColor="#fff"
+         android:text="Others"
+         android:textSize="15dp"
+         android:layout_marginTop="230dp"
+         android:layout_marginLeft="230dp"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+
+
+
+</RelativeLayout>
