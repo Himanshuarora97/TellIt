@@ -50,9 +50,9 @@ public class Login extends AppCompatActivity {
     private Matcher matcher;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private static final int RC_SIGN_IN=1;
+    private static final int RC_SIGN_IN = 1;
     private FirebaseAuth mAuth;
-    private static final String TAG="LOGIN";
+    private static final String TAG = "LOGIN";
 
     @BindView(R.id.relative)
     LinearLayout ll;
@@ -74,20 +74,20 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         FacebookSdk.sdkInitialize(getApplicationContext());
         ButterKnife.bind(this);
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
         final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
         usernameWrapper.setHint("Username");
         passwordWrapper.setHint("Password");
-        Button b1= (Button) findViewById(R.id.btn);
-        callbackManager=CallbackManager.Factory.create();
+        Button b1 = (Button) findViewById(R.id.btn);
+        callbackManager = CallbackManager.Factory.create();
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {       // FACEBOOK LOGIN
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                Intent i=new Intent(Login.this,MainActivity.class);
-              //  i.putExtra("")
+                Intent i = new Intent(Login.this, MainActivity.class);
+                //  i.putExtra("")
 
                 startActivity(i);
 
@@ -103,9 +103,6 @@ public class Login extends AppCompatActivity {
 
             }
         });                          // FACEBOOK LOGIN
-
-
-
 
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +124,7 @@ public class Login extends AppCompatActivity {
 
 
             }
-          });
+        });
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -136,15 +133,15 @@ public class Login extends AppCompatActivity {
                 .build();
 
 
-        mGoogleApiClient=new GoogleApiClient.Builder(getApplicationContext())
+        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-                        Snackbar.make(ll,"Login Failed", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(ll, "Login Failed", Snackbar.LENGTH_LONG).show();
 
                     }
-                }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+                }).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
 
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -161,12 +158,12 @@ public class Login extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Intent i=new Intent(Login.this,MainActivity.class);
-                    i.putExtra("link",1);
-                     i.putExtra("name",personName);
-                     i.putExtra("photo",personPhoto);
-                     startActivity(i);
-                     startActivity(new Intent(Login.this, MainActivity.class));
+                    Intent i = new Intent(Login.this, MainActivity.class);
+                    i.putExtra("link", 1);
+                    i.putExtra("name", personName);
+                    i.putExtra("photo", personPhoto);
+                    startActivity(i);
+                    startActivity(new Intent(Login.this, MainActivity.class));
 
                 }
             }
@@ -180,6 +177,7 @@ public class Login extends AppCompatActivity {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
     public boolean validatePassword(String password) {
         return password.length() > 5;
     }
@@ -198,15 +196,15 @@ public class Login extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
-                 personName = account.getDisplayName();
-                 personPhoto = account.getPhotoUrl();
+                personName = account.getDisplayName();
+                personPhoto = account.getPhotoUrl();
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
@@ -242,7 +240,6 @@ public class Login extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
-
 
 
 }

@@ -34,6 +34,7 @@ public class chosenStory extends AppCompatActivity {
     RecyclerView recyclerView;
     @BindView(R.id.toolImage)
     ImageView toolImageView;
+    private static int  SCROLL =  0 ;
 
     // RecyclerView variables
     RecyclerView.LayoutManager layoutManager;
@@ -47,6 +48,8 @@ public class chosenStory extends AppCompatActivity {
         setContentView(R.layout.chosen_story);
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        Log.e(TAG, "onCreate: "  + appBarLayout.getHeight() + "   " + appBarLayout.getTop() + "  "+appBarLayout.getTotalScrollRange() );
+
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
 //            boolean a=true;
@@ -56,14 +59,18 @@ public class chosenStory extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 //               if (scroll==-1){
 //
-//                   scroll=appBarLayout.getTotalScrollRange();
+                   SCROLL=appBarLayout.getTotalScrollRange();
 //               }
 
-                if (verticalOffset==0){
+                if (verticalOffset * -1 >= SCROLL-150){
                    collapsingToolbarLayout.setTitle("Story Title Here");
                    collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
                    collapsingToolbarLayout.setCollapsedTitleTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
                }
+               else
+                {
+                    collapsingToolbarLayout.setTitle("");
+                }
 //
 //                else if (a){
 //
