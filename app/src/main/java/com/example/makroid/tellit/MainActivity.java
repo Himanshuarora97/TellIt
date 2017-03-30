@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
-    int a=0;
+    int a = 0;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     DrawerLayout dl;
     // Variables
@@ -84,21 +84,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View view = navView.getHeaderView(0);
         imageView = (ImageView) view.findViewById(R.id.profile_image);
         textView = (TextView) view.findViewById(R.id.username);
-        dl= (DrawerLayout) findViewById(R.id.drawer_layout);
-        mAuth=FirebaseAuth.getInstance();
+        dl = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mAuth = FirebaseAuth.getInstance();
 
-        mAuthStateListener=new FirebaseAuth.AuthStateListener() {
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                if (firebaseAuth.getCurrentUser()==null){
+                if (firebaseAuth.getCurrentUser() == null) {
 
-                  //  startActivity(new Intent(MainActivity.this,Login.class));
-                }
-
-                else{
-
-
+                    //  startActivity(new Intent(MainActivity.this,Login.class));
+                } else {
 
 
                 }
@@ -114,11 +110,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View view = navView.getHeaderView(0);
         imageView = (ImageView) view.findViewById(R.id.profile_image);
         textView = (TextView) view.findViewById(R.id.username);
-     //   a=getIntent().getExtras().getInt("link");
+        //   a=getIntent().getExtras().getInt("link");
 
         // For demo
-            Picasso.with(this).load(R.drawable.image5).transform(new CircularImage()).into(imageView);
-            textView.setText("Jackson Parker");
+        Picasso.with(this).load(R.drawable.image5).transform(new CircularImage()).into(imageView);
+        textView.setText("Jackson Parker");
 
         // demo end
 
@@ -142,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            });
 
 
-                 imageView.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -207,107 +203,101 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
 
-                        final Dialog d=new Dialog(MainActivity.this,android.R.style.Theme_Translucent_NoTitleBar);// necessary to start animation in dialog box
+                        final Dialog d = new Dialog(MainActivity.this, android.R.style.Theme_Translucent_NoTitleBar);// necessary to start animation in dialog box
                         d.setContentView(R.layout.share_dilogue);
                         d.getWindow().setWindowAnimations(R.style.dialog_animation);
 
-                        ImageButton facebook= (ImageButton) d.findViewById(R.id.fb);
+                        ImageButton facebook = (ImageButton) d.findViewById(R.id.fb);
 
-                ImageButton whatsapp= (ImageButton) d.findViewById(R.id.whatsapp);
-                ImageButton other_sharing= (ImageButton) d.findViewById(R.id.other_sharing);
-                TextView close_share= (TextView) d.findViewById(R.id.close_share);
+                        ImageButton whatsapp = (ImageButton) d.findViewById(R.id.whatsapp);
+                        ImageButton other_sharing = (ImageButton) d.findViewById(R.id.other_sharing);
+                        TextView close_share = (TextView) d.findViewById(R.id.close_share);
 
-                facebook.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-
-                        FacebookSdk.sdkInitialize(getApplicationContext());
-
-                        callbackManager = CallbackManager.Factory.create();
-
-                        List<String> permissionNeeds = Arrays.asList("publish_actions");
-
-
-                        LoginManager.getInstance().logInWithPublishPermissions(MainActivity.this, permissionNeeds);
-
-                        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
-                        {
+                        facebook.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onSuccess(LoginResult loginResult)
-                            {
-                                sharePhotoToFacebook();
+                            public void onClick(View v) {
+
+
+                                FacebookSdk.sdkInitialize(getApplicationContext());
+
+                                callbackManager = CallbackManager.Factory.create();
+
+                                List<String> permissionNeeds = Arrays.asList("publish_actions");
+
+
+                                LoginManager.getInstance().logInWithPublishPermissions(MainActivity.this, permissionNeeds);
+
+                                LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                                    @Override
+                                    public void onSuccess(LoginResult loginResult) {
+                                        sharePhotoToFacebook();
+                                    }
+
+                                    @Override
+                                    public void onCancel() {
+                                        System.out.println("onCancel");
+                                    }
+
+                                    @Override
+                                    public void onError(FacebookException exception) {
+                                        System.out.println("onError");
+                                    }
+                                });
                             }
 
-                            @Override
-                            public void onCancel()
-                            {
-                                System.out.println("onCancel");
-                            }
+                        });
 
+
+                        whatsapp.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onError(FacebookException exception)
-                            {
-                                System.out.println("onError");
+                            public void onClick(View v) {
+
+
+                                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                                whatsappIntent.setType("text/plain");
+                                whatsappIntent.setPackage("com.whatsapp");
+                                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
+                                MainActivity.this.startActivity(whatsappIntent);
+
+
                             }
                         });
+
+
+                        other_sharing.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+
+                                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                                whatsappIntent.setType("text/plain");
+                                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
+                                MainActivity.this.startActivity(whatsappIntent);
+
+
+                            }
+                        });
+
+
+                        close_share.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                d.getWindow().getAttributes().windowAnimations = R.anim.share_dialog_animation;   // showing particular animation
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        d.dismiss();
+                                    }
+                                }, 500);
+                            }
+                        });//  close share dialog box
+
+
+                        d.show();
                     }
-
-                });
-
-
-                whatsapp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                        whatsappIntent.setType("text/plain");
-                        whatsappIntent.setPackage("com.whatsapp");
-                        whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
-                        MainActivity.this.startActivity(whatsappIntent);
-
-
-
-                    }
-                });
-
-
-                other_sharing.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                        whatsappIntent.setType("text/plain");
-                        whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Passing Story");
-                        MainActivity.this.startActivity(whatsappIntent);
-
-
-                    }
-                });
-
-
-                close_share.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        d.getWindow().getAttributes().windowAnimations=R.anim.share_dialog_animation;   // showing particular animation
-
-                      new Handler().postDelayed(new Runnable() {
-                          @Override
-                          public void run() {
-
-                              d.dismiss();
-                          }
-                      },500);
-                    }
-                });//  close share dialog box
-
-
-                d.show();
-                    }
-                },800);
+                }, 800);
 
                 break;
             case R.id.rate_fragment:
@@ -334,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }*/
 
 
-    private void sharePhotoToFacebook(){
+    private void sharePhotoToFacebook() {
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         SharePhoto photo = new SharePhoto.Builder()
                 .setBitmap(image)
@@ -350,12 +340,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int responseCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int responseCode, Intent data) {
         super.onActivityResult(requestCode, responseCode, data);
         callbackManager.onActivityResult(requestCode, responseCode, data);
     }
-
 
 
 }
