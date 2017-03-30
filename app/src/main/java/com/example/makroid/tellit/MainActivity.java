@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.makroid.tellit.fragments.RecentStoryFragment;
+import com.example.makroid.tellit.fragments.TopStoryFragment;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -114,27 +115,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imageView = (ImageView) view.findViewById(R.id.profile_image);
         textView = (TextView) view.findViewById(R.id.username);
      //   a=getIntent().getExtras().getInt("link");
-        if (a==1) {
-            imageView.setVisibility(View.VISIBLE);
-            textView.setText(getIntent().getExtras().getString("name"));
-            Picasso.with(this).load(getIntent().getExtras().getString("photo")).transform(new CircularImage()).into(imageView);
-        }
-        else if (a==0){
 
-            textView.setText("Login");
-            imageView.setVisibility(View.INVISIBLE);
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        // For demo
+            Picasso.with(this).load(R.drawable.image5).transform(new CircularImage()).into(imageView);
+            textView.setText("Jackson Parker");
 
-                    startActivity(new Intent(MainActivity.this,Login.class));
+        // demo end
 
-                }
-            });
 
-    }
+//        if (a==1) {
+//            imageView.setVisibility(View.VISIBLE);
+//            textView.setText(getIntent().getExtras().getString("name"));
+//            Picasso.with(this).load(getIntent().getExtras().getString("photo")).transform(new CircularImage()).into(imageView);
+//        }
+//        else if (a==0){
+//
+//            textView.setText("Login");
+//            imageView.setVisibility(View.INVISIBLE);
+//            textView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    startActivity(new Intent(MainActivity.this,Login.class));
+//
+//                }
+//            });
 
-            /*     imageView.setOnClickListener(new View.OnClickListener() {
+
+                 imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -145,13 +153,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
             }
         });
-        */
+
     }
+
 
     private void initViewPager() {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new RecentStoryFragment().newInstance("hello"), "Recent Stories");
-        adapter.addFragment(new RecentStoryFragment().newInstance("hello"), "Top Stories");
+        adapter.addFragment(new TopStoryFragment().newInstance("hello"), "Top Stories");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
