@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -342,7 +343,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int responseCode, Intent data) {
         super.onActivityResult(requestCode, responseCode, data);
-        callbackManager.onActivityResult(requestCode, responseCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && responseCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+            CircularImage image = new CircularImage();
+            if(image!=null)
+            Picasso.with(this).load(uri).transform(image).into(imageView);
+        }
+
+        // For  Facebook
+//        callbackManager.onActivityResult(requestCode, responseCode, data);
     }
 
 
