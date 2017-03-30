@@ -19,8 +19,13 @@ public class CircularImage implements Transformation {
         if (squaredBitmap != source) {
             source.recycle();
         }
-
-        Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+        Bitmap bitmap = null;
+            try {
+                bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+            }
+            catch (NullPointerException e){
+                return null;
+            }
 
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
