@@ -4,9 +4,6 @@ import android.support.v4.app.Fragment;
 
 import rx.subscriptions.CompositeSubscription;
 
-/**
- * Created by etiennelawlor on 6/13/15.
- */
 public abstract class SignInBaseFragment extends Fragment {
 
     // region Member Variables

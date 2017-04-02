@@ -36,9 +36,6 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
 
-/**
- * Created by etiennelawlor on 3/29/16.
- */
 public class SignInFragment extends SignInBaseFragment {
     // region Views
     @BindView(R.id.toolbar)
