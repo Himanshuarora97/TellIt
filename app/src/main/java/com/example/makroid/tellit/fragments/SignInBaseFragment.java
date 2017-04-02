@@ -7,7 +7,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by etiennelawlor on 6/13/15.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class SignInBaseFragment extends Fragment {
 
     // region Member Variables
     protected CompositeSubscription compositeSubscription = new CompositeSubscription();

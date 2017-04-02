@@ -39,7 +39,7 @@ import rx.functions.Func2;
 /**
  * Created by etiennelawlor on 3/29/16.
  */
-public class SignInFragment extends BaseFragment {
+public class SignInFragment extends SignInBaseFragment {
     // region Views
     @BindView(R.id.toolbar)
     Toolbar toolbar;

@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.setting_fragment:
                 state = 3;
+                startActivity(new Intent(MainActivity.this,SettingActivity.class));
                 break;
             case R.id.share_fragment:
                 state = 4;
