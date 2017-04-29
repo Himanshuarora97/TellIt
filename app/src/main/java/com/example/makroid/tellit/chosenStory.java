@@ -93,9 +93,9 @@ public class chosenStory extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(chosenStory.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerAdapter(chosenStory.this);
+      //  adapter = new RecyclerAdapter(chosenStory.this);
         //   recyclerView.findViewHolderForAdapterPosition(45);
-        recyclerView.setAdapter(adapter);
+     //   recyclerView.setAdapter(adapter);
 
     }
 

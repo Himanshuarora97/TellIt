@@ -37,6 +37,7 @@ dependencies {
     // RxBinding
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     apply plugin: 'com.jakewharton.butterknife'
     compile 'com.google.firebase:firebase-auth:9.2.0'
