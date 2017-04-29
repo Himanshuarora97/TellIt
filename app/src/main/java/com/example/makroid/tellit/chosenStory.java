@@ -17,6 +17,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -32,9 +34,11 @@ public class chosenStory extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.rvrank)
     RecyclerView recyclerView;
-    @BindView(R.id.toolImage)
+    @BindView(R.id.image_path)
     ImageView toolImageView;
     private static int  SCROLL =  0 ;
+
+    String image_url;
 
     // RecyclerView variables
     RecyclerView.LayoutManager layoutManager;
@@ -48,6 +52,9 @@ public class chosenStory extends AppCompatActivity {
         setContentView(R.layout.chosen_story);
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        Picasso.with(chosenStory.this).load("http://122.176.236.211:3333/"+getIntent().getExtras().getString("image_url")).fit().into(toolImageView);
+
         Log.e(TAG, "onCreate: "  + appBarLayout.getHeight() + "   " + appBarLayout.getTop() + "  "+appBarLayout.getTotalScrollRange() );
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {

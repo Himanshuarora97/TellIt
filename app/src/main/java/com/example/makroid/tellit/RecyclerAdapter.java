@@ -1,8 +1,12 @@
 package com.example.makroid.tellit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.pm.ActivityInfoCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,13 +78,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
             category= (TextView) itemView.findViewById(R.id.category_name);
             date= (TextView) itemView.findViewById(R.id.time_date);
             image_path= (ImageView) itemView.findViewById(R.id.image_path);
+            int width=image_path.getWidth();
+            int height=image_path.getHeight();
+            final int y=image_path.getTop();
+            final int x=image_path.getLeft();
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     int pos=getAdapterPosition();
                     Intent i=new Intent(c,chosenStory.class);
-                    c.startActivity(i);
+                    i.putExtra("x",x);
+                    i.putExtra("y",y);
+                    i.putExtra("image_url",recent_storyList.get(pos).getImage_path());
+                    ActivityOptionsCompat options= ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c,image_path,"profile");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        c.startActivity(i,options.toBundle());
+                    }
                 }
             });
 
