@@ -1,4 +1,4 @@
-package com.example.makroid.tellit;
+package com.example.makroid.tellit.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -22,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.makroid.tellit.utils.CircularImage;
+import com.example.makroid.tellit.Login;
+import com.example.makroid.tellit.R;
+import com.example.makroid.tellit.adapters.ViewPagerAdapter;
 import com.example.makroid.tellit.fragments.RecentStoryFragment;
 import com.example.makroid.tellit.fragments.TopStoryFragment;
 import com.facebook.CallbackManager;

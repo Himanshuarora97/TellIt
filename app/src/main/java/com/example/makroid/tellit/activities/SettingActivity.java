@@ -1,12 +1,12 @@
-package com.example.makroid.tellit;
+package com.example.makroid.tellit.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.Toast;
 
-import butterknife.BindView;
+import com.example.makroid.tellit.R;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

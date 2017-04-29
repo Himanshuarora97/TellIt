@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.example.makroid.tellit.DisplayUtility;
+import com.example.makroid.tellit.utils.DisplayUtility;
 import com.example.makroid.tellit.R;
 import com.jakewharton.rxbinding.widget.RxTextView;
 

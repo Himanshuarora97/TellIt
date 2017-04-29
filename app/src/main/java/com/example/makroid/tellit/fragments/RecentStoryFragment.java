@@ -1,6 +1,5 @@
 package com.example.makroid.tellit.fragments;
 
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +16,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.makroid.tellit.R;
-import com.example.makroid.tellit.RecyclerAdapter;
-import com.example.makroid.tellit.RecyclerSpace;
+import com.example.makroid.tellit.adapters.RecyclerAdapter;
+import com.example.makroid.tellit.utils.RecyclerSpace;
 import com.example.makroid.tellit.models.recent_story;
 
 import org.json.JSONArray;

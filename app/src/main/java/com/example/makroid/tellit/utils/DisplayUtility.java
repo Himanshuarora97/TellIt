@@ -1,4 +1,4 @@
-package com.example.makroid.tellit;
+package com.example.makroid.tellit.utils;
 
 import android.content.Context;
 import android.view.View;

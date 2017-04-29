@@ -1,4 +1,4 @@
-package com.example.makroid.tellit;
+package com.example.makroid.tellit.utils;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

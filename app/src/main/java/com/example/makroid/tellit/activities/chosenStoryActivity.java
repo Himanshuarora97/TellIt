@@ -1,4 +1,4 @@
-package com.example.makroid.tellit;
+package com.example.makroid.tellit.activities;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -11,21 +11,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.example.makroid.tellit.R;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class chosenStory extends AppCompatActivity {
+public class chosenStoryActivity extends AppCompatActivity {
 
-    private static final String TAG = chosenStory.class.getClass().getName();
+    private static final String TAG = chosenStoryActivity.class.getClass().getName();
     @BindView(R.id.app_bar_story)
     AppBarLayout appBarLayout;
     @BindView(R.id.toolbar_layout)
@@ -53,7 +50,7 @@ public class chosenStory extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        Picasso.with(chosenStory.this).load("http://122.176.236.211:3333/"+getIntent().getExtras().getString("image_url")).fit().into(toolImageView);
+        Picasso.with(chosenStoryActivity.this).load("http://122.176.236.211:3333/"+getIntent().getExtras().getString("image_url")).fit().into(toolImageView);
 
         Log.e(TAG, "onCreate: "  + appBarLayout.getHeight() + "   " + appBarLayout.getTop() + "  "+appBarLayout.getTotalScrollRange() );
 
@@ -98,9 +95,9 @@ public class chosenStory extends AppCompatActivity {
         });
 
 
-        layoutManager = new LinearLayoutManager(chosenStory.this, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(chosenStoryActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-      //  adapter = new RecyclerAdapter(chosenStory.this);
+      //  adapter = new RecyclerAdapter(chosenStoryActivity.this);
         //   recyclerView.findViewHolderForAdapterPosition(45);
      //   recyclerView.setAdapter(adapter);
 

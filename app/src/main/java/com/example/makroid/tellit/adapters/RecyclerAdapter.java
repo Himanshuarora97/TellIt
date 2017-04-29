@@ -1,4 +1,4 @@
-package com.example.makroid.tellit;
+package com.example.makroid.tellit.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,19 +6,18 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.pm.ActivityInfoCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.makroid.tellit.R;
+import com.example.makroid.tellit.activities.chosenStoryActivity;
 import com.example.makroid.tellit.models.recent_story;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -87,7 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
                 public void onClick(View v) {
 
                     int pos=getAdapterPosition();
-                    Intent i=new Intent(c,chosenStory.class);
+                    Intent i=new Intent(c,chosenStoryActivity.class);
                     i.putExtra("x",x);
                     i.putExtra("y",y);
                     i.putExtra("image_url",recent_storyList.get(pos).getImage_path());
