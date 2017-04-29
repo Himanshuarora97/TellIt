@@ -53,17 +53,18 @@ public class TopStoryFragment extends Fragment {
 
     private void setRecyclerView(boolean is_Portrait) {
         Log.e(TAG, "setRecyclerView: " + is_Portrait );
-        adapter = new RecyclerAdapter(getActivity());
-        // for landscape and large devices /* Used two CardView */
+  /*      adapter = new RecyclerAdapter(getActivity());
+         //for landscape and large devices  Used two CardView
         if(mRecyclerView == null) {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
-        // For Portrait or small devices
+       //  For Portrait or small devices
         else {
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             mRecyclerView.addItemDecoration(new RecyclerSpace(20));
         }
+        */
     }
 }
